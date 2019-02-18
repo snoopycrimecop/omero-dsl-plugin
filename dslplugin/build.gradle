@@ -1,0 +1,52 @@
+/* https://dzone.com/articles/debugging-gradle-plugins */
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // We need this for the sax reader and type processor
+    compile project(':dsl')
+    testImplementation('org.spockframework:spock-core:1.2-groovy-2.5') {
+        exclude module: 'groovy-all'
+    }
+}
+test {
+    systemProperty 'resourcesDir', file('src/test/resources')
+}
+
+gradlePlugin {
+    plugins {
+        dslplugin {
+            id = 'org.openmicroscopy.dsl'
+            implementationClass = 'org.openmicroscopy.dsl.DslPlugin'
+        }
+    }
+}
+
+task uberJar(type: Jar) {
+    from sourceSets.main.output
+    from configurations.runtimeClasspath.
+            findAll { it.name.endsWith('jar') }.
+            collect { zipTree(it) }
+}
+
+task sourceJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            // from components.java
+            artifact uberJar
+            artifact sourceJar
+        }
+    }
+}
