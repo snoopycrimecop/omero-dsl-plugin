@@ -1,7 +1,10 @@
-rootProject.name = 'omero-dsl-plugin'
-include 'dsl'
-include 'dslplugin'
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url 'https://artifacts.openmicroscopy.org/artifactory/maven' }
+    }
+}
 
-project(':dsl').projectDir = new File(rootDir, 'dsl')
-project(':dslplugin').projectDir = new File(rootDir, 'dslplugin')
+rootProject.name = "omero-dsl-plugin"
 
