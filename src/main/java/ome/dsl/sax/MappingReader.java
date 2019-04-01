@@ -1,6 +1,4 @@
 /*
- * ome.dsl.sax.SaxReader
- *
  *   Copyright 2006-2016 University of Dundee. All rights reserved.
  *   Use is subject to license terms supplied in LICENSE.txt
  */
