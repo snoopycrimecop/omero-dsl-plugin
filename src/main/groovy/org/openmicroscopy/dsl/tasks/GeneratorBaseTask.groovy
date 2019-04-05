@@ -83,8 +83,8 @@ abstract class GeneratorBaseTask extends DefaultTask {
         builder.velocityEngine = ve
         builder.template = template.get().asFile
         builder.omeXmlFiles = getOmeXmlFiles()
-        builder.databaseTypes = getDatabaseTypes()
-        builder.profile = getProfile()
+        builder.databaseTypes = getDatabaseTypes().get()
+        builder.profile = getProfile().get()
         builder.build().call()
     }
 
@@ -98,20 +98,20 @@ abstract class GeneratorBaseTask extends DefaultTask {
     }
 
     @Internal
-    Properties getDatabaseTypes() {
-        Properties databaseTypeProps = new Properties()
-        databaseType.get().asFile.withInputStream { databaseTypeProps.load(it) }
-        databaseTypeProps
+    Provider<Properties> getDatabaseTypes() {
+        databaseType.map { RegularFile file ->
+            Properties databaseTypeProps = new Properties()
+            file.asFile.withInputStream { databaseTypeProps.load(it) }
+            databaseTypeProps
+        }
     }
 
     @Internal
     Provider<String> getProfile() {
         // Determine database type
-        databaseType.flatMap { RegularFile file ->
+        databaseType.map { RegularFile file ->
             String fileName = file.asFile.name
-            Property<String> p = project.objects.property(String)
-            p.set(fileName.substring(0, fileName.lastIndexOf("-")))
-            p
+            fileName.substring(0, fileName.lastIndexOf("-"))
         }
     }
 
