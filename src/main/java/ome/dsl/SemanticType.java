@@ -1,5 +1,5 @@
 /*
- *   Copyright 2006-2014 University of Dundee. All rights reserved.
+ *   Copyright 2006-2019 University of Dundee. All rights reserved.
  *   Use is subject to license terms supplied in LICENSE.txt
  */
 
@@ -109,6 +109,8 @@ public abstract class SemanticType {
 
     private Boolean named;
 
+    private Boolean deprecated;
+
     private final Set<String> uniqueConstraints = new HashSet<String>();
 
     public final Properties databaseTypes;
@@ -135,6 +137,7 @@ public abstract class SemanticType {
         setGlobal(Boolean.valueOf(attrs.getProperty("global", "false")));
         setImmutable(Boolean.valueOf(attrs.getProperty("immutable", "false")));
         setNamed(Boolean.valueOf(attrs.getProperty("named", "false")));
+        setDeprecated(Boolean.valueOf(attrs.getProperty("deprecated", "false")));
 
         // TODO add "UnsupportedOperation for any other properties in attrs.
         // same in Property
@@ -431,6 +434,14 @@ public abstract class SemanticType {
 
     public Boolean getImmutable() {
         return immutable;
+    }
+
+    public void setDeprecated(Boolean deprecated) {
+        this.deprecated = deprecated;
+    }
+
+    public Boolean getDeprecated() {
+        return deprecated;
     }
 
     public void setProperties(List<Property> properties) {

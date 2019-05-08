@@ -1,5 +1,5 @@
 /*
- *   Copyright 2006-2014 University of Dundee. All rights reserved.
+ *   Copyright 2006-2019 University of Dundee. All rights reserved.
  *   Use is subject to license terms supplied in LICENSE.txt
  */
 
@@ -178,6 +178,8 @@ public abstract class Property { // TODO need to define equality so that two
     private Boolean insert;
 
     private Boolean update;
+
+    private Boolean deprecated;
 
     // Mappings
     private Boolean one2Many = Boolean.FALSE;
@@ -512,6 +514,14 @@ public abstract class Property { // TODO need to define equality so that two
         return this.bidirectional;
     }
 
+    public void setDeprecated(Boolean deprecated) {
+        this.deprecated = deprecated;
+    }
+
+    public Boolean getDeprecated() {
+        return deprecated;
+    }
+
     /**
      * @return the database definition for the property's type, or an empty string
      * @see <a href="https://trac.openmicroscopy.org/ome/ticket/803">ticket 803</a>
@@ -530,7 +540,7 @@ public abstract class Property { // TODO need to define equality so that two
 
     /**
      * creates a Property and sets fields based on attributes USING DEFAULT
-     * VALUES. Subclassees may override these values
+     * VALUES. Subclasses may override these values
      */
     protected Property(SemanticType st, Properties attrs, Properties databaseTypes) {
         setSt(st);
@@ -556,6 +566,7 @@ public abstract class Property { // TODO need to define equality so that two
         // TODO Mutability
         setInsert(Boolean.TRUE);
         setUpdate(Boolean.valueOf(attrs.getProperty("mutable", "true")));
+        setDeprecated(Boolean.valueOf(attrs.getProperty("deprecated", "false")));
 
         if (JAVATYPES.containsKey(type)) {
             setForeignKey(null);
