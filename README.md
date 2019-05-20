@@ -19,19 +19,11 @@ $./gradlew publishToMavenLocal
 
 Include the following to the top of your _build.gradle_ file:
 
+
 ```groovy
-buildscript {
-    repositories {
-        jcenter()
-        mavenLocal()
-    }
-
-    dependencies {
-        classpath 'org.openmicroscopy:dsl:1.0'
-    }
-} 
-
-apply plugin: 'org.openmicroscopy.omero-dsl-plugin'
+plugins {
+    id "org.openmicroscopy.dsl" version "1.0.0"
+}
 ```
 
 ### Configuring plugin
