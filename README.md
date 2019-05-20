@@ -27,11 +27,11 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.openmicroscopy:dslplugin:1.0'
+        classpath 'org.openmicroscopy:dsl:1.0'
     }
 } 
 
-apply plugin: 'org.openmicroscopy.dslplugin'
+apply plugin: 'org.openmicroscopy.omero-dsl-plugin'
 ```
 
 ### Configuring plugin
