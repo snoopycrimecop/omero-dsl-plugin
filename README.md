@@ -73,7 +73,7 @@ dsl {
 This will add a task `generateHibernate` under the group `omero-dsl` in gradle _(to print a list of available gradle
 tasks run `gradle tasks` in a terminal)_.
 
-_If you are using Intellij, refresh the _Gradle Toolbar_ and the task will appear in the list once the IDE completes 
+_If you are using IntelliJ, refresh the _Gradle Toolbar_ and the task will appear in the list once the IDE completes 
 its work._
 
 For convenience, you can set the following three properties if templates and generated files reside in similar locations.
