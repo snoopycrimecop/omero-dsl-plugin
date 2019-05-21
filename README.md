@@ -7,12 +7,12 @@ This plugin manages the reading of `*.ome.xml` mappings and compilation of `.vm`
 
 To build the plugin run:
 ```shell
-$./gradlew build
+gradle build
 ```
 
 To publish the plugin locally run:
 ```shell
-$./gradlew publishToMavenLocal
+gradle publishToMavenLocal
 ```
 
 ### Usage
@@ -54,8 +54,8 @@ dsl {
 }
 ```
 
-This will add a task `generateJava` under the group `omero-dsl` in gradle _(to print a list of available gradle
-tasks run `gradle tasks` in a terminal)_.
+This will add a task `generateJava` under the group `omero-dsl` in gradle. Run `gradle tasks`
+for a complete list.
 
 Resource Example:
 
@@ -70,8 +70,8 @@ dsl {
 }
 ```
 
-This will add a task `generateHibernate` under the group `omero-dsl` in gradle _(to print a list of available gradle
-tasks run `gradle tasks` in a terminal)_.
+This will add a task `generateHibernate` under the group `omero-dsl` in gradle. Run `gradle tasks`
+for a complete list.
 
 _If you are using IntelliJ, refresh the _Gradle Toolbar_ and the task will appear in the list once the IDE completes 
 its work._
