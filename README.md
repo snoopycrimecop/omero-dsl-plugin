@@ -22,7 +22,7 @@ Include the following at the top of your _build.gradle_ file:
 
 ```groovy
 plugins {
-    id "org.openmicroscopy.dsl" version "1.0.0"
+    id "org.openmicroscopy.dsl" version "x.y.z"
 }
 ```
 
