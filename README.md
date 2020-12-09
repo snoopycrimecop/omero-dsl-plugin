@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/ome/omero-dsl-plugin/workflows/Gradle/badge.svg)](https://github.com/ome/omero-dsl-plugin/actions)
+
 ## OMERO DSL Plugin
 
 The OMERO DSL plugin for [Gradle](https://gradle.org/) provides a plugin named `dsl`.
