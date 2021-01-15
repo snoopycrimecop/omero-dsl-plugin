@@ -26,7 +26,7 @@ import org.apache.velocity.runtime.RuntimeConstants
 @CompileStatic
 class VelocityConfig {
 
-    final Map<String, String> data = new HashMap<String, String>()
+    final Map<String, String> data = new Hashtable<String, String>()
 
     void setProperty(String key, String value) {
         data.put(key, value)
