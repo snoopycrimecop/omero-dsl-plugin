@@ -39,8 +39,13 @@ abstract class DslBase {
         File file = new File("$type-types.$FileTypes.EXTENSION_DB_TYPE")
         File databaseType = findInCollection(collection, file, FileTypes.PATTERN_DB_TYPE)
         if (!databaseType) {
-            databaseType = new File("psql-types.$FileTypes.EXTENSION_DB_TYPE")
-            Log.info("using default $databaseType")
+            Set<File> files = getFiles(collection, "*resources*")
+            if (files.isEmpty()) {
+                databaseType = file
+                Log.info("using reference file $databaseType")
+            } else {
+                throw new GradleException("Can't find $file in collection of database types")
+            }
         } else {
             Log.info("Found database types file $databaseType")
         }
