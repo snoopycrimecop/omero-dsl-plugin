@@ -26,87 +26,87 @@ import org.apache.velocity.runtime.RuntimeConstants
 @CompileStatic
 class VelocityConfig {
 
-    final Properties data = new Properties()
+    final Map<String, String> data = new Hashtable<String, String>()
 
     void setProperty(String key, String value) {
-        data.setProperty(key, value)
+        data.put(key, value)
     }
 
     void setProperties(Map<String, String> propertyMap) {
         propertyMap.each { entry ->
-            data.setProperty(entry.key, entry.value)
+            data.put(entry.key, entry.value)
         }
     }
 
     void setResourceLoader(String resourceLoader) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.RESOURCE_LOADER,
                 resourceLoader
         )
     }
 
     void setFileResourceLoaderPath(String fileResourceLoaderPath) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.FILE_RESOURCE_LOADER_PATH,
                 fileResourceLoaderPath
         )
     }
 
     void setFileResourceLoaderCache(boolean fileResourceLoaderCache) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.FILE_RESOURCE_LOADER_CACHE,
                 fileResourceLoaderCache as String
         )
     }
 
     void setLoggerClassName(String loggerClassName) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.RUNTIME_LOG_NAME,
                 loggerClassName
         )
     }
 
     void setMaxNumberLoops(int max) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.MAX_NUMBER_LOOPS,
                 max as String
         )
     }
 
     void setSkipInvalidIterator(boolean skipInvalid) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.SKIP_INVALID_ITERATOR,
                 skipInvalid as String
         )
     }
 
     void setCheckEmptyObjects(boolean emptyCheck) {
-        data.setProperty(RuntimeConstants.CHECK_EMPTY_OBJECTS, emptyCheck as String)
+        data.put(RuntimeConstants.CHECK_EMPTY_OBJECTS, emptyCheck as String)
     }
 
     void setErrorMsgStart(String msgStart) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.ERRORMSG_START,
                 msgStart
         )
     }
 
     void setErrorMsgEnd(String msgEnd) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.ERRORMSG_END,
                 msgEnd
         )
     }
 
     void setParseDirectiveMaxdepth(int max) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.DEFINE_DIRECTIVE_MAXDEPTH,
                 max as String
         )
     }
 
     void setProvideScopeControl(boolean scope) {
-        data.setProperty(
+        data.put(
                 RuntimeConstants.PROVIDE_SCOPE_CONTROL,
                 scope as String
         )
@@ -117,5 +117,12 @@ class VelocityConfig {
 
         // Set default for velocity config
         setCheckEmptyObjects(false)
+    }
+
+    Properties getProperties()
+    {
+        Properties p = new Properties()
+        p.putAll(data)
+        return p
     }
 }

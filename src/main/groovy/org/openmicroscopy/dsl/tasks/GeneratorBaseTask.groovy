@@ -30,6 +30,7 @@ import org.gradle.api.file.RegularFile
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
+import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
@@ -57,7 +58,7 @@ abstract class GeneratorBaseTask extends DefaultTask {
 
     private final RegularFileProperty databaseType = project.objects.fileProperty()
 
-    private final Property<Properties> velocityConfig = project.objects.property(Properties)
+    private final MapProperty velocityConfig = project.objects.mapProperty(String.class, String.class)
 
     private final ConfigurableFileCollection mappingFiles = project.files()
 
@@ -76,7 +77,9 @@ abstract class GeneratorBaseTask extends DefaultTask {
     @TaskAction
     void apply() {
         // Create velocity engine with config
-        VelocityEngine ve = new VelocityEngine(velocityConfig.get())
+        Properties p = new Properties()
+        p.putAll(velocityConfig.get())
+        VelocityEngine ve = new VelocityEngine(p)
 
         // Build our file generator
         def builder = createGenerator()
@@ -127,7 +130,7 @@ abstract class GeneratorBaseTask extends DefaultTask {
 
     @Input
     @Optional
-    Property<Properties> getVelocityConfig() {
+    MapProperty getVelocityConfig() {
         return velocityConfig
     }
 

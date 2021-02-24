@@ -110,7 +110,7 @@ class DslPluginBase extends DslBase implements Plugin<Project> {
                 t.with {
                     group = GROUP
                     formatOutput.set(ext.formatOutput)
-                    velocityConfig.set(dsl.velocity.data)
+                    velocityConfig.set(dsl.velocity.getProperties())
                     outputDir.set(getOutputDirProvider(dsl.outputDir, ext.outputDir))
                     template.set(findTemplateProvider(dsl.templates, ext.template))
                     databaseType.set(findDatabaseTypeProvider(dsl.databaseTypes, dsl.database))
@@ -128,7 +128,7 @@ class DslPluginBase extends DslBase implements Plugin<Project> {
             void execute(FileGeneratorTask t) {
                 t.with {
                     group = GROUP
-                    velocityConfig.set(dsl.velocity.data)
+                    velocityConfig.set(dsl.velocity.getProperties())
                     outputFile.set(getOutputFileProvider(dsl.outputDir, ext.outputFile))
                     template.set(findTemplateProvider(dsl.templates, ext.template))
                     databaseType.set(findDatabaseTypeProvider(dsl.databaseTypes, dsl.database))

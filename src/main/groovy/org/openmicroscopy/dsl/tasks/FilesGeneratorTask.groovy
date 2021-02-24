@@ -26,7 +26,9 @@ import ome.dsl.velocity.Generator
 import ome.dsl.velocity.MultiFileGenerator
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.OutputDirectory
+
 
 @SuppressWarnings("UnstableApiUsage")
 @CompileStatic
@@ -56,6 +58,7 @@ class FilesGeneratorTask extends GeneratorBaseTask {
         return this.outputDir
     }
 
+    @Nested
     @Internal
     Property<MultiFileGenerator.FileNameFormatter> getFormatOutput() {
         return this.formatOutput
